@@ -1,13 +1,15 @@
 import React from 'react'
-import AboutUs from './pages/AboutUs'
 import GlobalStyle from './components/GlobalStyle'
+import Nav from './components/Nav'
+import Routes from './Routes/Routes'
 
 
 function App() {
   return (
     <div className="App">
-      <GlobalStyle/>
-      <AboutUs/>
+      <GlobalStyle />
+      <Nav />
+      <Routes />
     </div>
   )
 }
