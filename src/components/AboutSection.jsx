@@ -20,7 +20,7 @@ const AboutSection = () => {
         </div>
         <p>Contact us for any photography or videography ideas that you have. We
           have professionals with amazing skills to help you achieve it.</p>
-        <button>Contact us</button>
+        <button>Contact Us</button>
       </Description>
       <Image>
         {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */ }
