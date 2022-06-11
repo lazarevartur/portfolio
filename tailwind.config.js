@@ -1,11 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.tsx",
-    "./components/**/*.tsx",
-  ],
+  content: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   theme: {
-    extend: {},
+    fontFamily: {
+      kaushan: ["Kaushan Script"],
+    },
+    extend: {
+      colors: {
+        green: {
+          DEFAULT: "#00f260",
+        },
+      },
+    },
   },
   plugins: [],
-}
+};
