@@ -42,7 +42,7 @@ function Navbar() {
       <span className="text-xl font-bold border-b-4 text-green border-green md:text-2xl">
         {activePage}
       </span>
-      <div className="flex space-x-3 text-lg text-red-400 text-">
+      <div className="flex space-x-3 text-lg text-dark dark:text-white">
         {pages.map(({ link, name }, index) => (
           <LinkItem
             key={index}
