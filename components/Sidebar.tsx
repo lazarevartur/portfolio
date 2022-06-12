@@ -2,24 +2,34 @@ import Image from "next/image";
 import { AiFillGithub, AiFillLinkedin, AiFillInstagram } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { GiTie } from "react-icons/gi";
+import { useTheme } from "next-themes";
+import { useCallback } from "react";
 
 const Sidebar = () => {
+  const { theme, setTheme } = useTheme();
+
+  const themeHandler = useCallback(() => {
+    setTheme(theme === "light" ? "dark" : "light");
+  }, [theme, setTheme]);
+
   return (
-    <div>
+    <>
       <Image
         src="/user_avatar.webp"
         alt="user avatar"
-        width={200}
-        height={200}
+        width={128}
+        height={128}
         className="rounded-full x-auto 5"
       />
       <h3 className="my-4 text-3xl font-medium tracking-wider font-kaushan ">
         <span className="text-green">Artur </span>
         Zub
       </h3>
-      <p className="px-2 py-1 my-3 bg-gray-300 rounded-full">Web Developer</p>
+      <p className="px-2 py-1 my-3 bg-gray-300 rounded-full dark:bg-dark-300">
+        Web Developer
+      </p>
       <a
-        className="flex items-center justify-center px-2 py-1 my-3 bg-gray-300 rounded-full"
+        className="flex items-center justify-center px-2 py-1 my-3 bg-gray-300 rounded-full dark:bg-dark-300"
         href=""
         download="name"
       >
@@ -38,7 +48,7 @@ const Sidebar = () => {
         </a>
       </div>
 
-      <div className="py-4 my-5 -mx-4 bg-gray-200">
+      <div className="py-4 my-5 -mx-4 bg-gray-200 dark:bg-dark-200">
         <div className="flex items-center justify-center space-x-2">
           <GoLocation className="w-6 h-6" />
           <span>Israil, netaniya</span>
@@ -52,10 +62,13 @@ const Sidebar = () => {
       >
         Send Email
       </button>
-      <button className="w-8/12 px-5 py-2 my-2 text-white rounded-full outline-none bg-gradient-to-r from-green to-blue-400">
+      <button
+        className="w-8/12 px-5 py-2 my-2 text-white rounded-full outline-none bg-gradient-to-r from-green to-blue-400"
+        onClick={themeHandler}
+      >
         Toggle theme
       </button>
-    </div>
+    </>
   );
 };
 
