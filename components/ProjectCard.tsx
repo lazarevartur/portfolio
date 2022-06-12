@@ -1,11 +1,14 @@
-import { FC, useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { FC, useRef, useState } from "react";
 import { AiFillGithub, AiFillProject } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
-import { IProject } from "../types";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { useOnClickOutside } from "../hooks/useOnClickOutside";
+
 import { fadeInUp, stagger } from "../animations";
+
+import type { IProject } from "../types";
 
 const ProjectCard: FC<IProject> = ({
   name,
@@ -17,18 +20,30 @@ const ProjectCard: FC<IProject> = ({
   key_techs,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
+  const projectCardRef = useRef<HTMLDivElement>(null);
+
+  const closeModal = () => {
+    setShowDetail(false);
+  };
+
+  useOnClickOutside(projectCardRef, closeModal);
+
+  const onClickHandler = () => {
+    setShowDetail(true);
+  };
 
   return (
     <motion.div
       variants={fadeInUp}
       className="col-span-12 p-2 bg-gray-200 rounded-lg sm:col-span-6 lg:col-span-4 dark:bg-dark-200"
+      ref={projectCardRef}
     >
       <div>
         <Image
           src={image_path}
           alt={name}
           className="cursor-pointer"
-          onClick={() => setShowDetail(true)}
+          onClick={onClickHandler}
           layout="responsive"
           height="150"
           width="300"
@@ -42,9 +57,12 @@ const ProjectCard: FC<IProject> = ({
         <p className="my-2 text-center">{name}</p>
 
         {showDetail && (
-          <div className="absolute top-0 left-0 z-10 grid w-full h-auto p-2 text-black bg-gray-100 md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100">
+          <div className="absolute top-0 left-0 z-10 grid w-full h-auto p-2 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100">
             <motion.div variants={stagger} initial="initial" animate="animate">
-              <motion.div variants={fadeInUp}>
+              <motion.div
+                variants={fadeInUp}
+                className="border-4 border-gray-200"
+              >
                 <Image
                   src={image_path}
                   alt={name}
@@ -100,7 +118,7 @@ const ProjectCard: FC<IProject> = ({
 
             <motion.button
               variants={fadeInUp}
-              onClick={() => setShowDetail(false)}
+              onClick={closeModal}
               className="absolute p-1 bg-gray-200 rounded-full top-3 right-3 focus:outline-none dark:bg-dark-200"
             >
               <MdClose size={30} />

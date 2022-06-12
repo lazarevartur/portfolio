@@ -46,6 +46,7 @@ const ProjectNavItem: FC<ProjectNavItemProps> = ({
 const Projects = () => {
   const navBarItems = useMemo(() => createProjectNavItems(projects), []);
   const [activeTab, setActiveTab] = useState<Category>("all");
+  const [activeCard, setCard] = useState<string>("");
 
   const projectList = useMemo(
     () => onDisplayItems(projects, activeTab),
@@ -57,7 +58,7 @@ const Projects = () => {
       variants={routeAnimate}
       initial="initila"
       animate="animate"
-      exit='exit'
+      exit="exit"
       className="px-5 py-2 overflow-y-scroll "
       style={{ height: "65vh" }}
     >
