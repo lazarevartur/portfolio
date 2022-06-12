@@ -1,9 +1,17 @@
+import { motion } from "framer-motion";
+import { routeAnimate, stagger } from "../animations";
 import ServiceCard from "../components/ServiceCard";
 import { services } from "../data";
 
 const Index = () => {
   return (
-    <div className="flex flex-col flex-grow px-6 pt-1">
+    <motion.div
+      variants={routeAnimate}
+      initial="initila"
+      animate="animate"
+      exit="exit"
+      className="flex flex-col flex-grow px-6 pt-1"
+    >
       <h1 className={"my-3 font-medium"}>
         I am currently pursuing B.Tech Degree(Final Year) in Computer Science
         Engineering from Academy of Technology. I have 3+ years of experience in
@@ -12,13 +20,18 @@ const Index = () => {
       </h1>
       <div className="flex-grow p-4 mt-5 -ml-6 -mr-6 bg-gray-400 dark:bg-dark">
         <h6 className="my-3 text-xl font-bold tracking-wide">What I offer</h6>
-        <div className="grid gap-6 lg:grid-cols-2">
+        <motion.div
+          variants={stagger}
+          initial="initial"
+          animate="animate"
+          className="grid gap-6 lg:grid-cols-2"
+        >
           {services.map((service, index) => (
             <ServiceCard key={index} services={service} />
           ))}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

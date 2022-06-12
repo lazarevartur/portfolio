@@ -19,7 +19,8 @@ const Sidebar = () => {
         alt="user avatar"
         width={128}
         height={128}
-        className="rounded-full x-auto 5"
+        layout="intrinsic"
+        className="mx-auto border rounded-full"
       />
       <h3 className="my-4 text-3xl font-medium tracking-wider font-kaushan ">
         <span className="text-green">Artur </span>
