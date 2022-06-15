@@ -3,10 +3,10 @@
 }
 
 .card_main_box {
-  @apply relative h-20 bg-blue-500 w-80 rounded-xl drop-shadow-lg transition-all ease-in-out;
+  @apply relative h-20 bg-blue-500 w-auto rounded-xl drop-shadow-lg transition-all ease-in-out;
 
   &.active {
-    @apply h-[420px];
+    @apply h-[380px];
     .toggle span {
       @apply -translate-x-1/2 -translate-y-[70%] rotate-[225deg];
     }
@@ -50,5 +50,5 @@
 }
 
 .imgBx {
-  @apply relative h-60 w-60 bg-white mt-5 shadow-def border-4;
+  @apply relative h-52 w-52 bg-white mt-5 shadow-def border-4;
 }

@@ -4,6 +4,7 @@ import { GoLocation } from "react-icons/go";
 import { GiTie } from "react-icons/gi";
 import { useTheme } from "next-themes";
 import { useCallback } from "react";
+import Sandbox from "../pages/sandbox";
 
 const Sidebar = () => {
   const { theme, setTheme } = useTheme();
@@ -14,15 +15,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <Image
-        src="/user_avatar.webp"
-        alt="user avatar"
-        width={128}
-        height={128}
-        layout="intrinsic"
-        className="mx-auto border rounded-full"
-      />
-      <h3 className="my-4 text-3xl font-medium tracking-wider font-kaushan ">
+      <Sandbox/>
+      <h3 className="my-4 text-3xl font-medium tracking-wider pt-14 font-kaushan">
         <span className="text-green">Artur </span>
         Zub
       </h3>
