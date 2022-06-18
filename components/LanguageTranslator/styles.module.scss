@@ -1,0 +1,58 @@
+.container {
+  font-family: "Poppins", sans-serif;
+  @apply w-[690px] bg-blue-300 rounded-md p-8;
+
+  button {
+    @apply w-full p-3 mt-5 border-none outline-none cursor-pointer text-white rounded text-base bg-blue-400;
+  }
+}
+
+.wrapper {
+  @apply rounded-md border border-white;
+
+  .textInput {
+    @apply flex border-b border-white;
+
+    .toText {
+      @apply border-l border-white border-solid rounded-none;
+    }
+
+    textarea {
+      @apply h-[250px] w-full border-none outline-none bg-inherit resize-none text-lg rounded-md py-3 px-4;
+    }
+  }
+}
+
+.controls {
+  @apply py-3 px-4;
+
+  &,
+  li,
+  .icons,
+  .icons svg {
+    @apply flex items-center justify-between;
+  }
+
+  .icons {
+    @apply py-2 w-[38%];
+  }
+
+  .icons svg {
+    @apply text-sm cursor-pointer text-gray-600 w-12;
+  }
+
+  .row {
+    &.from .icons {
+      @apply border-r border-white pr-4;
+    }
+    &.to .icons {
+      @apply border-l border-white pl-4;
+    }
+    select {
+      @apply border-none outline-none bg-inherit text-lg;
+    }
+  }
+  .exchange {
+    @apply text-gray-600 text-[16px] cursor-pointer;
+  }
+}

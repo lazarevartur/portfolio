@@ -1,28 +1,42 @@
+import type { AppProps } from "next/app";
+import { useRef } from "react";
 import { ThemeProvider } from "next-themes";
 import { AnimatePresence } from "framer-motion";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 
 import "../styles/globals.css";
 
-import type { AppProps } from "next/app";
+config.autoAddCss = false;
 
 function MyApp({ Component, pageProps, router }: AppProps) {
+  const queryClient = useRef(new QueryClient());
+
   return (
-    <ThemeProvider attribute="class">
-      <div className="grid grid-cols-12 gap-6 px-5 lg:px-48 my-14 sm:px-30 md:px-32">
-        <div className="col-span-12 p-4 text-center bg-white dark:bg-dark-500 lg:col-span-3 rounded-2xl shadow-custom-light dark:shadow-custom-dark">
-          <Sidebar />
-        </div>
-        <div className="flex flex-col col-span-12 overflow-hidden bg-white dark:bg-dark-500 lg:col-span-9 rounded-2xl shadow-custom-light dark:shadow-custom-dark">
-          <Navbar />
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
-        </div>
-      </div>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient.current}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ThemeProvider attribute="class">
+          <div className="grid grid-cols-12 gap-6 px-5 lg:px-48 my-14 sm:px-30 md:px-32">
+            <div className="col-span-12 p-4 text-center bg-white dark:bg-dark-500 lg:col-span-3 rounded-2xl shadow-custom-light dark:shadow-custom-dark">
+              <Sidebar />
+            </div>
+            <div className="flex flex-col col-span-12 overflow-hidden bg-white dark:bg-dark-500 lg:col-span-9 rounded-2xl shadow-custom-light dark:shadow-custom-dark">
+              <Navbar />
+              <AnimatePresence exitBeforeEnter>
+                <Component {...pageProps} key={router.route} />
+              </AnimatePresence>
+            </div>
+          </div>
+        </ThemeProvider>
+      </Hydrate>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import LanguageTranslator from "../components/LanguageTranslator";
 
 interface CenterProps {
   children: ReactNode;
@@ -13,7 +14,11 @@ const Center: FC<CenterProps> = ({ children }) => {
 };
 
 const Sandbox = () => {
-  return <Center>div</Center>;
+  return (
+    <Center>
+      <LanguageTranslator />
+    </Center>
+  );
 };
 
 export default Sandbox;
