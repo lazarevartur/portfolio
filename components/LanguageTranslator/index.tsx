@@ -7,10 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cn from "classnames";
 import {
   ChangeEventHandler,
-  DetailedHTMLProps,
-  FC,
-  SelectHTMLAttributes,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -18,49 +16,25 @@ import {
 import s from "./styles.module.scss";
 
 import { countries } from "./data/countries";
-import { Counrty } from "./types";
-import { ENGLISH_CODE, HEBREW_CODE } from "./utils/constants";
+import { ENGLISH_CODE, HEBREW_CODE } from "./constants";
 
-import { useTranslate } from "./hooks/query/useTranslate";
-
-interface OptionProps {
-  value: string;
-  label: string;
-}
-
-const Option: FC<OptionProps> = ({ value, label }) => {
-  return <option value={value}>{label}</option>;
-};
-
-interface SelectProps
-  extends DetailedHTMLProps<
-    SelectHTMLAttributes<HTMLSelectElement>,
-    HTMLSelectElement
-  > {
-  data: Counrty;
-}
-
-const SelectCountries: FC<SelectProps> = ({ data, ...props }) => {
-  const countrys = Object.entries(data);
-
-  return (
-    <select {...props}>
-      {countrys.map(([code, name]) => (
-        <Option key={code} value={code} label={name} />
-      ))}
-    </select>
-  );
-};
+import SelectCountries from "./components/SelectCountries";
+import { useTranslate } from "./hooks/useTranslate";
 
 function LanguageTranslator() {
   const [languageFrom, setLanguageFrom] = useState<string>(ENGLISH_CODE);
   const [languageTo, setLanguageTo] = useState<string>(HEBREW_CODE);
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+ 
+  const textareaFromRef = useRef<HTMLTextAreaElement>(null);
+  const textareaToRef = useRef<HTMLTextAreaElement>(null);
 
   const { data, setRequest } = useTranslate();
 
-  console.log(data, "data");
+  useEffect(() => {
+    if (textareaToRef.current && data) {
+      textareaToRef.current.value = data;
+    }
+  }, [data]);
 
   const languageFromSelectHandler = useCallback<
     ChangeEventHandler<HTMLSelectElement>
@@ -70,15 +44,46 @@ function LanguageTranslator() {
     ChangeEventHandler<HTMLSelectElement>
   >((e) => setLanguageTo(e.target.value), []);
 
-  const buttonHandler = useCallback(() => {
-    if (textareaRef.current?.value) {
+  const exchangeHandler = () => {
+    if (textareaFromRef.current && textareaToRef.current) {
+      const tempText = textareaFromRef.current?.value;
+      textareaFromRef.current.value = textareaToRef.current.value;
+      textareaToRef.current.value = tempText;
+
+      setLanguageFrom(languageTo);
+      setLanguageTo(languageFrom);
+
+      setRequest({
+        langFrom: languageTo,
+        langTo: languageFrom,
+        text: textareaFromRef.current.value,
+      });
+    }
+  };
+
+  const copyText = (string: string | undefined) => {
+    if (string) {
+      navigator.clipboard.writeText(string);
+    }
+  };
+
+  const speachText = (text: string | undefined, textLang: string) => {
+    if (text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = textLang;
+      speechSynthesis.speak(utterance);
+    }
+  };
+
+  const buttonHandler = () => {
+    if (textareaFromRef.current?.value) {
       setRequest({
         langFrom: languageFrom,
         langTo: languageTo,
-        text: textareaRef.current.value,
+        text: textareaFromRef.current.value,
       });
     }
-  }, [languageTo, languageFrom, setRequest]);
+  };
 
   return (
     <div className={cn(s.container)}>
@@ -89,42 +94,59 @@ function LanguageTranslator() {
             placeholder="Enter text"
             cols={10}
             rows={5}
-            ref={textareaRef}
+            ref={textareaFromRef}
           />
           <textarea
             className={cn(s.toText)}
             placeholder="Enter text"
             cols={10}
             rows={5}
+            ref={textareaToRef}
             disabled
           />
         </div>
         <ul className={cn(s.controls)}>
           <li className={cn(s.row, s.from)}>
             <div className={cn(s.icons)}>
-              <FontAwesomeIcon icon={faVolumeUp} />
-              <FontAwesomeIcon icon={faCopy} />
+              <FontAwesomeIcon
+                icon={faVolumeUp}
+                onClick={() =>
+                  speachText(textareaFromRef.current?.value, languageFrom)
+                }
+              />
+              <FontAwesomeIcon
+                icon={faCopy}
+                onClick={() => copyText(textareaFromRef.current?.value)}
+              />
             </div>
             <SelectCountries
               className={cn(s.from)}
               data={countries}
-              defaultValue={languageFrom}
+              value={languageFrom}
               onChange={languageFromSelectHandler}
             />
           </li>
-          <li className={cn(s.exchange)}>
+          <li className={cn(s.exchange)} onClick={exchangeHandler}>
             <FontAwesomeIcon icon={faExchangeAlt} />
           </li>
           <li className={cn(s.row, s.to)}>
             <SelectCountries
               className={cn(s.to)}
               data={countries}
-              defaultValue={languageTo}
+              value={languageTo}
               onChange={languageToSelectHandler}
             />
             <div className={cn(s.icons)}>
-              <FontAwesomeIcon icon={faVolumeUp} />
-              <FontAwesomeIcon icon={faCopy} />
+              <FontAwesomeIcon
+                icon={faVolumeUp}
+                onClick={() =>
+                  speachText(textareaToRef.current?.value, languageTo)
+                }
+              />
+              <FontAwesomeIcon
+                icon={faCopy}
+                onClick={() => copyText(textareaToRef.current?.value)}
+              />
             </div>
           </li>
         </ul>
