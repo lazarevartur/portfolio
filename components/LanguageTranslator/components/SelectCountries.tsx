@@ -13,6 +13,7 @@ interface SelectProps
 }
 
 const SelectCountries: FC<SelectProps> = ({ data, ...props }) => {
+  console.log("SelectCountries", "RENDER", props.className);
   const countrys = Object.entries(data);
 
   return (

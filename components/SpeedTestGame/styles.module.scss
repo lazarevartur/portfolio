@@ -1,0 +1,64 @@
+.container {
+  font-family: "Poppins", sans-serif;
+  @apply bg-cyan-500 flex justify-center items-center  w-full h-full;
+}
+
+.wrapper {
+  @apply rounded-lg w-[770px] bg-white p-9;
+  input {
+    @apply -z-50 opacity-0 absolute;
+  }
+  button {
+    @apply w-[105px] py-2 px-0 text-white cursor-pointer text-base rounded bg-cyan-500 transition-all  duration-150 active:scale-95;
+  }
+  .contentBox {
+    .content {
+      @apply flex justify-between items-center mt-4 pt-3 px-0 border-t border-gray-300;
+      .resultDetails {
+        @apply flex justify-between w-[75%];
+        li {
+          @apply flex items-center border-gray-300 pr-6 border-r last:border-none h-6;
+          span {
+            @apply block text-lg ml-3 font-medium;
+          }
+          b {
+            @apply font-medium;
+          }
+          p {
+            @apply text-base;
+          }
+        }
+      }
+    }
+    @apply py-3 px-5  border border-gray-300 rounded-lg;
+    .typingText {
+      @apply h-64 overflow-y-auto;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+      p {
+        @apply text-xl text-justify break-all tracking-wide select-none;
+        span {
+          &.success {
+            @apply text-green-400 bg-green-100 outline-white outline-1 outline rounded;
+          }
+          &.mistake {
+            @apply text-red-400 bg-red-100 outline-white outline-1 outline rounded;
+          }
+          &.active {
+            @apply text-cyan-400 relative;
+            &:before {
+              content: "";
+              @apply absolute left-0 bottom-0 h-[2px] w-full opacity-0 bg-cyan-400 animate-[blink_1s_ease-in-out_infinite];
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}

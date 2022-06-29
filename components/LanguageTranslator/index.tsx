@@ -22,9 +22,11 @@ import SelectCountries from "./components/SelectCountries";
 import { useTranslate } from "./hooks/useTranslate";
 
 function LanguageTranslator() {
+  console.log("LanguageTranslator", "REDNDER");
+
   const [languageFrom, setLanguageFrom] = useState<string>(ENGLISH_CODE);
   const [languageTo, setLanguageTo] = useState<string>(HEBREW_CODE);
- 
+
   const textareaFromRef = useRef<HTMLTextAreaElement>(null);
   const textareaToRef = useRef<HTMLTextAreaElement>(null);
 

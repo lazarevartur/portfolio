@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react";
 import LanguageTranslator from "../components/LanguageTranslator";
+import SpeedTestGame from "../components/SpeedTestGame";
 
 interface CenterProps {
   children: ReactNode;
@@ -7,7 +8,7 @@ interface CenterProps {
 
 const Center: FC<CenterProps> = ({ children }) => {
   return (
-    <div className="flex items-center justify-center w-full h-full">
+    <div className="flex items-center justify-center w-full h-full bg-cyan-500">
       {children}
     </div>
   );
@@ -16,7 +17,7 @@ const Center: FC<CenterProps> = ({ children }) => {
 const Sandbox = () => {
   return (
     <Center>
-      <LanguageTranslator />
+      <SpeedTestGame />
     </Center>
   );
 };

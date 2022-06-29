@@ -18,7 +18,7 @@ export const useTranslate = () => {
     () => sendTextForTranslation(request),
     {
       enabled: isEnabled,
-      staleTime: Infinity,
+      staleTime: 5000,
       select: (data) => data.responseData.translatedText,
     }
   );

@@ -6,6 +6,8 @@ interface OptionProps {
 }
 
 const Option: FC<OptionProps> = ({ value, label }) => {
+  console.log('Option', 'REDNER');
+  
   return <option value={value}>{label}</option>;
 };
 
