@@ -4,6 +4,7 @@ import { GoLocation } from "react-icons/go";
 import { GiTie } from "react-icons/gi";
 import { useTheme } from "next-themes";
 import { useCallback } from "react";
+import ProfileCard from "./ProfileCard";
 
 const Sidebar = () => {
   const { theme, setTheme } = useTheme();
@@ -14,14 +15,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <Image
-        src="/user_avatar.webp"
-        alt="user avatar"
-        width={128}
-        height={128}
-        className="rounded-full x-auto 5"
-      />
-      <h3 className="my-4 text-3xl font-medium tracking-wider font-kaushan ">
+      <ProfileCard/>
+      <h3 className="my-4 text-3xl font-medium tracking-wider pt-14 font-kaushan">
         <span className="text-green">Artur </span>
         Zub
       </h3>
@@ -36,7 +31,7 @@ const Sidebar = () => {
         <GiTie className="w-6 h-6" />
         Download Resume
       </a>
-      <div className="flex justify-around w-9/12 mx-auto my-5 text-green-500 md:w-full">
+      <div className="flex justify-around w-9/12 my-5 text-green-500 jmx-auto md:w-full">
         <a href="">
           <AiFillGithub className="w-8 h-8 cursor-pointer" />
         </a>
