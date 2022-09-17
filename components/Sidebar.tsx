@@ -46,10 +46,10 @@ const Sidebar = () => {
       <div className="py-4 my-5 -mx-4 bg-gray-200 dark:bg-dark-200">
         <div className="flex items-center justify-center space-x-2">
           <GoLocation className="w-6 h-6" />
-          <span>Israil, netaniya</span>
+          <span>Israel, Netanya</span>
         </div>
         <p className="my-2">viart.pro@gmail.com</p>
-        <p className="my-2">0936722361</p>
+        <p className="my-2">0535408465</p>
       </div>
       <button
         className="w-8/12 px-5 py-2 my-2 text-white rounded-full outline-none bg-gradient-to-r from-green to-blue-400"

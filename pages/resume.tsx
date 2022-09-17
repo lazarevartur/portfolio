@@ -21,20 +21,43 @@ const Resume = () => {
             <h5 className="my-2 text-xl font-bold">
               Computer Science Engineering
             </h5>
-            <p className="font-semibold">Academy of Technology (2017-2021)</p>
-            <p className="my-3">
-              I am currently pursuing B.tech in Computer Science Engineering
-              from Academy of Technology
+            <p>Dnipro Industrial College (2010-2014)</p>
+          </div>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Professional Training (React.js, JS)
+            </h5>
+            <p>
+              <a href="https://deveducation.com/en/" target="_blank">
+                DevEducation (2020)
+              </a>
             </p>
           </div>
         </motion.div>
 
         <motion.div variants={fadeInUp} initial="initial" animate="animate">
           <h5 className="my-3 text-2xl font-bold">Experience</h5>
-          <div className="">
-            <h5 className="my-2 text-xl font-bold">Software Developer Jr.</h5>
-            <p className="font-semibold">Tata Consultancy Services</p>
-            <p className="my-3">I dont know why I am doing this job</p>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Front-End Developer 2021 - present
+            </h5>
+            <p>
+              <a href="https://blaize.tech/" target="_blank">
+                Blaize
+              </a>
+            </p>
+          </div>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Full Stack Developer 2019-2021
+            </h5>
+            <p>Mirax company</p>
+          </div>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Full Stack Developer 2017-2018
+            </h5>
+            <p>Freelance</p>
           </div>
         </motion.div>
       </div>

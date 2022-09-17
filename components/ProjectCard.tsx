@@ -1,14 +1,23 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { AiFillGithub, AiFillProject } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
+import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 
 import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
 import { fadeInUp, stagger } from "../animations";
 
-import type { IProject } from "../types";
+import type { IImageMetaData, IProject } from "../types";
+
+const mapImageToSliderData = (
+  images: IImageMetaData[]
+): ReactImageGalleryItem[] =>
+  images.map((image) => ({
+    original: image.secure_url,
+    thumbnail: image.secure_url,
+  }));
 
 const ProjectCard: FC<IProject> = ({
   name,
@@ -18,10 +27,11 @@ const ProjectCard: FC<IProject> = ({
   description,
   github_url,
   key_techs,
+  folderPath,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
   const projectCardRef = useRef<HTMLDivElement>(null);
-
+  const [images, setImages] = useState<ReactImageGalleryItem[] | null>(null);
   const closeModal = () => {
     setShowDetail(false);
   };
@@ -32,6 +42,36 @@ const ProjectCard: FC<IProject> = ({
     setShowDetail(true);
   };
 
+  const images2 = [
+    {
+      original: "https://picsum.photos/id/1018/1000/600/",
+      thumbnail: "https://picsum.photos/id/1018/250/150/",
+    },
+    {
+      original: "https://picsum.photos/id/1015/1000/600/",
+      thumbnail: "https://picsum.photos/id/1015/250/150/",
+    },
+    {
+      original: "https://picsum.photos/id/1019/1000/600/",
+      thumbnail: "https://picsum.photos/id/1019/250/150/",
+    },
+  ];
+
+  useEffect(() => {
+    if (folderPath) {
+      (async () => {
+        const results = await fetch("/api/search", {
+          method: "POST",
+          body: JSON.stringify({
+            expression: `folder=${folderPath || ""}`,
+          }),
+        }).then((res) => res.json());
+        const { resources } = results;
+        const images = mapImageToSliderData(resources as IImageMetaData[]);
+        setImages(images);
+      })();
+    }
+  }, [folderPath]);
   return (
     <motion.div
       variants={fadeInUp}
@@ -48,12 +88,6 @@ const ProjectCard: FC<IProject> = ({
           height="150"
           width="300"
         />
-        {/* <img
-        src={image_path}
-        alt={name}
-        className="cursor-pointer"
-        onClick={() => setShowDetail(true)}
-      /> */}
         <p className="my-2 text-center">{name}</p>
 
         {showDetail && (
@@ -63,13 +97,14 @@ const ProjectCard: FC<IProject> = ({
                 variants={fadeInUp}
                 className="border-4 border-gray-200"
               >
-                <Image
-                  src={image_path}
-                  alt={name}
-                  layout="responsive"
-                  height="150"
-                  width="300"
-                />
+                {images && <ImageGallery items={images} showPlayButton={false} />}
+                {/*<Image*/}
+                {/*  src={image_path}*/}
+                {/*  alt={name}*/}
+                {/*  layout="responsive"*/}
+                {/*  height="220"*/}
+                {/*  width="300"*/}
+                {/*/>*/}
               </motion.div>
               <motion.div
                 variants={fadeInUp}

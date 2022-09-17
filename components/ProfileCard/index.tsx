@@ -11,7 +11,7 @@ function ProfileCard() {
       <div className={s.contentBx}>
         <div className={s.content}>
           <h2>
-            Someone Famous <br /> <span>Creative Desinger</span>
+            Someone Famous <br /> <span>Front-end Developer</span>
           </h2>
           <div className={s.imgBx}>
             <Image
