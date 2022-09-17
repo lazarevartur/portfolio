@@ -20,12 +20,42 @@ export interface IProject {
   github_url: string;
   category: Category[];
   key_techs: string[];
+  folderPath: string;
 }
 
 export type Category =
+  | "redux"
+  | "TypeScript"
+  | "next.js"
+  | "web3"
+  | "react-query"
   | "react"
   | "node"
   | "express"
   | "django"
   | "mongo"
   | "all";
+
+export interface IImageMetaData {
+  asset_id: string;
+  public_id: string;
+  format: string;
+  version: number;
+  resource_type: string;
+  type: string;
+  created_at: string;
+  bytes: number;
+  width: number;
+  height: number;
+  folder: string;
+  url: string;
+  secure_url: string;
+}
+
+export interface IImageData {
+  id: string;
+  title: string;
+  image: string;
+  width: number;
+  height: number;
+}
