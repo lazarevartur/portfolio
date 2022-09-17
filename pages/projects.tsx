@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { routeAnimate, stagger } from "../animations";
+import ImageGallery from 'react-image-gallery';
 
 import ProjectCard from "../components/ProjectCard";
 
 import { projects } from "../data";
-import { Category, IProject } from "../types";
+import { Category, IImageMetaData, IProject } from "../types";
+import { getFolders, mapImagesResources, search } from "../lib/cloudinary";
 
 const createProjectNavItems = (data: IProject[]) =>
   data.reduce<Category[]>(
@@ -43,15 +45,76 @@ const ProjectNavItem: FC<ProjectNavItemProps> = ({
   );
 };
 
-const Projects = () => {
+interface IProjects {
+  images: any[];
+  mainImages: any[];
+  folders: any[];
+  nextCursor: string;
+}
+
+const Projects: FC<IProjects> = ({
+  images: defaultImages,
+  mainImages: defaultMainImages,
+  folders: defaultFolders,
+  nextCursor: defaultNextCursor,
+}) => {
   const navBarItems = useMemo(() => createProjectNavItems(projects), []);
   const [activeTab, setActiveTab] = useState<Category>("all");
   const [activeCard, setCard] = useState<string>("");
+
+  const [images2, setImages] = useState(defaultImages);
+  const [nextCursor, setNextCursor] = useState<string | undefined>(
+    defaultNextCursor
+  );
+  const [folderPath, setFolderPath] = useState("");
 
   const projectList = useMemo(
     () => onDisplayItems(projects, activeTab),
     [activeTab]
   );
+
+  const getMoreImagesHandler = async () => {
+    const results = await fetch("/api/search", {
+      method: "POST",
+      body: JSON.stringify({
+        nextCursor,
+        expression: `folder=${folderPath}`,
+      }),
+    }).then((res) => res.json());
+    console.log(results);
+    const { resources, next_cursor: updateNextCursor } = results;
+    const images = mapImagesResources(resources as IImageMetaData[]);
+
+    // setImages((prev) => [...prev, ...images]);
+    // setNextCursor(updateNextCursor);
+  };
+
+  const getFolderPathHandler = (event: any) => {
+    const folderPath = event.target.dataset.folderPath;
+    setFolderPath(folderPath);
+    setNextCursor(undefined);
+    setImages([]);
+  };
+
+  useEffect(() => {
+    if (folderPath) {
+      (async () => {
+        const results = await fetch("/api/search", {
+          method: "POST",
+          body: JSON.stringify({
+            nextCursor,
+            expression: `folder=${folderPath || ""}`,
+          }),
+        }).then((res) => res.json());
+        // console.log(results)
+        const { resources, next_cursor: updateNextCursor } = results;
+        const images = mapImagesResources(resources as IImageMetaData[]);
+        console.log(images);
+        setImages((prev) => [...prev, ...images]);
+        setNextCursor(updateNextCursor);
+      })();
+    }
+  }, [folderPath]);
 
   return (
     <motion.div
@@ -87,3 +150,23 @@ const Projects = () => {
 };
 
 export default Projects;
+
+export async function getStaticProps() {
+  const results = await search({
+    expression: 'folder=""',
+  });
+
+
+  const { folders } = await getFolders();
+
+  const { resources, next_cursor: nextCursor } = results;
+  const images = mapImagesResources(resources as IImageMetaData[]);
+
+  return {
+    props: {
+      images,
+      folders,
+      nextCursor: nextCursor || false,
+    },
+  };
+}

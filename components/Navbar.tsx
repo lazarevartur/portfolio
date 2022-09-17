@@ -6,7 +6,7 @@ const pages = [
   { name: "About", link: "/" },
   { name: "Projects", link: "/projects" },
   { name: "Resume", link: "/resume" },
-  { name: "Sandbox", link: "/sandbox" },
+  // { name: "Sandbox", link: "/sandbox" },
 ];
 
 const findPageNameByLink = (pathname: string) =>
