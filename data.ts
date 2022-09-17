@@ -100,11 +100,10 @@ export const tools: ISkill[] = [
 ];
 export const projects: IProject[] = [
   {
-    name: "Decentralized open source project developing Web3 Fantasy Sports and Gaming Protocols V1",
+    name: "DApp Web3 Fantasy Sports and Gaming Protocols V1",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663443897/projects/nomo_v1/nomoKeeper_page_1_bshsci.png",
-    deployed_url: "https://sumit-chat.netlify.app/",
-    github_url: "https://github.com/Dey-Sumit/chat-app-socket.io-react-node",
+    deployed_url: "https://app.leaguedao.com/nomo/",
     category: ["react", "web3", "node"],
     description:
       "Basic Realtime Chat App where one can create a room can talk to each other",
@@ -120,11 +119,10 @@ export const projects: IProject[] = [
     folderPath: "projects/nomo_v1",
   },
   {
-    name: "Decentralized open source project developing Web3 Fantasy Sports and Gaming Protocols V2",
+    name: "DApp Web3 Fantasy Sports and Gaming Protocols V2",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663371532/projects/nomo_v2/nomo_page_3_kxdvt2.png",
-    deployed_url: "http://sumaxtweetme.pythonanywhere.com/",
-    github_url: "https://github.com/Dey-Sumit/tweetme",
+    deployed_url: "https://app.leaguedao.com/megaleague/account-overview",
     category: ["react", "next.js", "web3", "TypeScript", "node", "express"],
     description:
       "First Django Project :) | Typical Social Media App where one can post,like ,comment etc",
@@ -147,8 +145,6 @@ export const projects: IProject[] = [
     name: "Ready investment solutions",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663446233/projects/mirax/mirax_page_1_rkbtxi.png",
-    deployed_url: "https://dev-talks.herokuapp.com/",
-    github_url: "https://github.com/Dey-Sumit/Dev-talks",
     category: ["react", "TypeScript", "redux", "node", "mongo"],
     description:
       "Social Media app for developers who can share project,create posts,etc...",
@@ -168,12 +164,11 @@ export const projects: IProject[] = [
     name: "Cross-protocol LP tokens Swap",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663444436/projects/flype/flype_page_5_abqe2j.png",
-    deployed_url: "https://visual-algorithm.web.app/",
-    github_url: "https://github.com/Dey-Sumit/algorithm-visualizer",
+    deployed_url: "https://flype.fi/",
     category: ["react", "redux", "TypeScript", "web3", "node", "express"],
     description:
       "An web app which shows how an algorithm (path finding or sorting) works with cool animation",
-    key_techs: ["React", "Redux", "RTK", "material-ui"],
+    key_techs: ["React", "Redux", "RTK", "material-ui, TypeScript"],
     folderPath: "projects/flype",
   },
   {
@@ -182,8 +177,6 @@ export const projects: IProject[] = [
       "This app shows a statistical view about corona virus over the world",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663445129/projects/aqru/aqru_page_1_avbhhj.png",
-    deployed_url: "https://covid-19-tracker-by-sumit.web.app/",
-    github_url: "https://github.com/Dey-Sumit/covid-19-tracker",
     category: ["react", "redux", "web3"],
     key_techs: ["React", "Chart.js", "Material UI", 'react-charts', 'redux'],
     folderPath: "projects/aqru",
@@ -192,8 +185,6 @@ export const projects: IProject[] = [
     name: "Stake to earn App",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663444733/projects/your/your_page_1_mrdpnr.png",
-    deployed_url: "!#",
-    github_url: "https://github.com/Dey-Sumit/color-classification",
     category: ["react", "web3", 'TypeScript'],
     description:
       "Tried ML with JS :) | this app classifies a color using CNN algorithm in browser",
