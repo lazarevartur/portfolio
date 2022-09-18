@@ -122,7 +122,7 @@ const Projects: FC<IProjects> = ({
       className="px-5 py-2 overflow-y-scroll "
       style={{ height: "70vh" }}
     >
-      <nav className="flex px-3 py-2 space-x-3">
+      <nav className="flex px-3 py-2 space-x-3 overflow-x-auto">
         {navBarItems.map((item, index) => (
           <ProjectNavItem
             key={index}

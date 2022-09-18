@@ -25,6 +25,7 @@ const ProjectCard: FC<IProject> = ({
 }) => {
   const [showDetail, setShowDetail] = useState(false);
   const projectCardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<ReactImageGalleryItem[] | null>(null);
   const [activeCard, setCard] = useState<string>("");
 
@@ -54,6 +55,12 @@ const ProjectCard: FC<IProject> = ({
     }
   }, [activeCard]);
 
+  useEffect(() => {
+    if (showDetail) {
+      cardRef?.current?.scrollIntoView();
+    }
+  }, [showDetail]);
+
   return (
     <motion.div
       variants={fadeInUp}
@@ -76,14 +83,21 @@ const ProjectCard: FC<IProject> = ({
         <p className="my-2 text-center">{name}</p>
 
         {showDetail && (
-          <div className="absolute top-0 left-0 z-10 grid w-full p-4 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100 ">
+          <div
+            ref={cardRef}
+            className="absolute top-0 left-0 z-10 grid w-full p-4 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100 "
+          >
             <motion.div variants={stagger} initial="initial" animate="animate">
               <motion.div
                 variants={fadeInUp}
                 className="border-4 border-gray-200"
               >
                 {images && (
-                  <ImageGallery items={images} showPlayButton={false} />
+                  <ImageGallery
+                    additionalClass="max-w-[250px] sm:max-w-full lg:max-w-full"
+                    items={images}
+                    showPlayButton={false}
+                  />
                 )}
               </motion.div>
               <motion.div
