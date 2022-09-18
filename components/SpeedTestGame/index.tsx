@@ -1,5 +1,4 @@
 import cn from "classnames";
-import { Item } from "framer-motion/types/components/Reorder/Item";
 import {
   FC,
   KeyboardEventHandler,
@@ -12,7 +11,6 @@ import {
 } from "react";
 import { typingText as initialText } from "./data";
 import s from "./styles.module.scss";
-import { getTypingText } from "./utils";
 
 const lattersLowerCase: string[] = [
   "q",
@@ -86,7 +84,7 @@ const initResult = [] as LetterStatus[];
 const validateWpm = (wpm: string | null | number | undefined) =>
   !wpm || wpm < 0 || wpm === Infinity ? 0 : wpm;
 
-const SpeedTestGame: FC = () => {
+function SpeedTestGame() {
   const [typingText, setTypingText] = useState<string[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -200,4 +198,4 @@ const SpeedTestGame: FC = () => {
   );
 };
 
-export default memo(SpeedTestGame);
+export default SpeedTestGame

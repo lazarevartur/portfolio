@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FC, useEffect, useRef, useState } from "react";
-import { AiFillGithub, AiFillProject } from "react-icons/ai";
+import { AiFillProject } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 
@@ -97,31 +97,24 @@ const ProjectCard: FC<IProject> = ({
                 variants={fadeInUp}
                 className="border-4 border-gray-200"
               >
-                {images && <ImageGallery items={images} showPlayButton={false} />}
-                {/*<Image*/}
-                {/*  src={image_path}*/}
-                {/*  alt={name}*/}
-                {/*  layout="responsive"*/}
-                {/*  height="220"*/}
-                {/*  width="300"*/}
-                {/*/>*/}
+                {images && (
+                  <ImageGallery items={images} showPlayButton={false} />
+                )}
               </motion.div>
               <motion.div
                 variants={fadeInUp}
                 className="flex justify-center my-4 space-x-3"
               >
-                <a
-                  href={github_url}
-                  className="flex items-center px-4 py-2 space-x-3 text-lg bg-gray-200 dark:bg-dark-200"
-                >
-                  <AiFillGithub /> <span>Github</span>
-                </a>
-                <a
-                  href={deployed_url}
-                  className="flex items-center px-4 py-2 space-x-3 text-lg bg-gray-200 dark:bg-dark-200"
-                >
-                  <AiFillProject /> <span>Project</span>
-                </a>
+                {deployed_url && (
+                  <a
+                    href={deployed_url}
+                    className="flex items-center px-4 py-2 space-x-3 text-lg bg-gray-200 dark:bg-dark-200"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <AiFillProject /> <span>Project</span>
+                  </a>
+                )}
               </motion.div>
             </motion.div>
 
@@ -138,12 +131,13 @@ const ProjectCard: FC<IProject> = ({
 
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-wrap mt-5 space-x-2 text-sm tracking-wider"
+                className="flex flex-wrap mt-5 text-sm tracking-wider"
               >
+                <div className="flex self-center underline mr-1">Stack:</div>
                 {key_techs.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2 py-1 my-1 bg-gray-200 dark:bg-dark-200 rounde-sm"
+                    className="px-2 py-1 my-1 mr-1 bg-gray-200 dark:bg-dark-200 round-sm"
                   >
                     {tech}
                   </span>
@@ -154,7 +148,7 @@ const ProjectCard: FC<IProject> = ({
             <motion.button
               variants={fadeInUp}
               onClick={closeModal}
-              className="absolute p-1 bg-gray-200 rounded-full top-3 right-3 focus:outline-none dark:bg-dark-200"
+              className="absolute p-1 bg-gray-200 rounded-full -top-5 -right-5 focus:outline-none dark:bg-dark-200"
             >
               <MdClose size={30} />
             </motion.button>
