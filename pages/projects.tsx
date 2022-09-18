@@ -148,7 +148,7 @@ const Projects: FC<IProjects> = ({
         {projectList.map((item, index) => (
           <ProjectCard
             key={index}
-            {...item}
+            project={item}
             activeCardHandler={activeCardHandler}
           />
         ))}

@@ -22,7 +22,6 @@ export interface IProject {
   category: Category[];
   key_techs: string[];
   folderPath: string;
-  activeCardHandler: (cardName?: string) => void;
 }
 
 export type Category =

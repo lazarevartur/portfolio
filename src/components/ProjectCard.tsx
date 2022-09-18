@@ -12,15 +12,22 @@ import { fadeInUp, stagger } from "../../animations";
 import type { IImageMetaData, IProject } from "../types";
 import { mapImageToSliderData } from "../utils";
 
-const ProjectCard: FC<IProject> = ({
-  name,
-  image_path,
-  deployed_url,
-  description,
-  github_url,
-  key_techs,
-  folderPath,
-  tasks,
+interface IProjectCardProps {
+  project: IProject;
+  activeCardHandler?: (cardName?: string) => void;
+}
+
+const ProjectCard: FC<IProjectCardProps> = ({
+  project: {
+    name,
+    image_path,
+    deployed_url,
+    description,
+    github_url,
+    key_techs,
+    folderPath,
+    tasks,
+  },
   activeCardHandler,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
@@ -43,7 +50,7 @@ const ProjectCard: FC<IProject> = ({
   useEffect(() => {
     if (activeCard) {
       (async () => {
-        activeCardHandler();
+        activeCardHandler?.();
 
         const results = await fetch("/api/search", {
           method: "POST",
