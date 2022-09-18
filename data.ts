@@ -100,31 +100,6 @@ export const tools: ISkill[] = [
 ];
 export const projects: IProject[] = [
   {
-    name: "DApp Nomo Game",
-    image_path:
-      "https://res.cloudinary.com/frontdev-pro/image/upload/v1663443897/projects/nomo_v1/nomoKeeper_page_1_bshsci.png",
-    deployed_url: "https://app.leaguedao.com/nomo/",
-    category: ["react", "web3", "node"],
-    description:
-      "Decentralized open source project developing Web3 Fantasy Sports and Gaming Protocols.",
-    tasks: [
-      "Layout of new application components",
-      "Connecting the backend to the application",
-      "Connections of new smart contracts",
-      "Optimizing the performance of the reaction components",
-    ],
-    key_techs: [
-      "React",
-      "React-query",
-      "Node",
-      "Express",
-      "Stylus",
-      "Web3",
-      "Eslint",
-    ],
-    folderPath: "projects/nomo_v1",
-  },
-  {
     name: "DApp Mega league",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663371532/projects/nomo_v2/nomo_page_3_kxdvt2.png",
@@ -155,6 +130,31 @@ export const projects: IProject[] = [
       "bignumber.js",
     ],
     folderPath: "projects/nomo_v2",
+  },
+  {
+    name: "DApp Nomo Game",
+    image_path:
+      "https://res.cloudinary.com/frontdev-pro/image/upload/v1663443897/projects/nomo_v1/nomoKeeper_page_1_bshsci.png",
+    deployed_url: "https://app.leaguedao.com/nomo/",
+    category: ["react", "web3", "node"],
+    description:
+      "Decentralized open source project developing Web3 Fantasy Sports and Gaming Protocols.",
+    tasks: [
+      "Layout of new application components",
+      "Connecting the backend to the application",
+      "Connections of new smart contracts",
+      "Optimizing the performance of the reaction components",
+    ],
+    key_techs: [
+      "React",
+      "React-query",
+      "Node",
+      "Express",
+      "Stylus",
+      "Web3",
+      "Eslint",
+    ],
+    folderPath: "projects/nomo_v1",
   },
   {
     name: "Ready investment solutions",

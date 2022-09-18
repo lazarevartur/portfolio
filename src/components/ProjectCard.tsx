@@ -12,24 +12,33 @@ import { fadeInUp, stagger } from "../../animations";
 import type { IImageMetaData, IProject } from "../types";
 import { mapImageToSliderData } from "../utils";
 
-const ProjectCard: FC<IProject> = ({
-  name,
-  image_path,
-  category,
-  deployed_url,
-  description,
-  github_url,
-  key_techs,
-  folderPath,
-  tasks,
+interface IProjectCardProps {
+  project: IProject;
+  activeCardHandler?: (cardName?: string) => void;
+}
+
+const ProjectCard: FC<IProjectCardProps> = ({
+  project: {
+    name,
+    image_path,
+    deployed_url,
+    description,
+    github_url,
+    key_techs,
+    folderPath,
+    tasks,
+  },
+  activeCardHandler,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
   const projectCardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<ReactImageGalleryItem[] | null>(null);
-  const [activeCard, setCard] = useState<string>("");
+  const [activeCard, setActiveCard] = useState<string>("");
 
   const closeModal = () => {
     setShowDetail(false);
+    setActiveCard("");
   };
 
   useOnClickOutside(projectCardRef, closeModal);
@@ -41,6 +50,8 @@ const ProjectCard: FC<IProject> = ({
   useEffect(() => {
     if (activeCard) {
       (async () => {
+        activeCardHandler?.();
+
         const results = await fetch("/api/search", {
           method: "POST",
           body: JSON.stringify({
@@ -59,7 +70,7 @@ const ProjectCard: FC<IProject> = ({
       variants={fadeInUp}
       className="col-span-12 p-2 bg-gray-200 rounded-lg sm:col-span-6 lg:col-span-4 dark:bg-dark-200"
       onClick={() => {
-        setCard(folderPath);
+        setActiveCard(folderPath);
       }}
       ref={projectCardRef}
     >
@@ -76,14 +87,21 @@ const ProjectCard: FC<IProject> = ({
         <p className="my-2 text-center">{name}</p>
 
         {showDetail && (
-          <div className="absolute top-0 left-0 z-10 grid w-full p-4 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100 ">
+          <div
+            ref={cardRef}
+            className="absolute top-0 left-0 z-10 grid w-full p-4 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100 "
+          >
             <motion.div variants={stagger} initial="initial" animate="animate">
               <motion.div
                 variants={fadeInUp}
                 className="border-4 border-gray-200"
               >
                 {images && (
-                  <ImageGallery items={images} showPlayButton={false} />
+                  <ImageGallery
+                    additionalClass="max-w-[250px] sm:max-w-full lg:max-w-full"
+                    items={images}
+                    showPlayButton={false}
+                  />
                 )}
               </motion.div>
               <motion.div
