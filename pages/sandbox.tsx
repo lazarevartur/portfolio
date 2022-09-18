@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
-import LanguageTranslator from "../components/LanguageTranslator";
-import SpeedTestGame from "../components/SpeedTestGame";
+import LanguageTranslator from "../src/components/LanguageTranslator";
+import SpeedTestGame from "../src/components/SpeedTestGame";
 
 interface CenterProps {
   children: ReactNode;

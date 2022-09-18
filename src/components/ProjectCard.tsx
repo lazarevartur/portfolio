@@ -7,7 +7,7 @@ import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 
 import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
-import { fadeInUp, stagger } from "../animations";
+import { fadeInUp, stagger } from "../../animations";
 
 import type { IImageMetaData, IProject } from "../types";
 

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
-import { PLAYGROUND_COMPONENTS } from "../../config";
+import { PLAYGROUND_COMPONENTS } from "../../src/config";
 
 const PlaygroundItem = () => {
   const router = useRouter();

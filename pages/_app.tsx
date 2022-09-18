@@ -7,11 +7,11 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-import "../styles/globals.css";
+import "../src/styles/globals.css";
 
-import { APP_LINKS } from "../routes";
-import MainLayout from "../components/Layouts/MainLayout";
-import FullWidthLayout from "../components/Layouts/FullWidthLayout";
+import { APP_LINKS } from "../src/routes";
+import MainLayout from "../src/components/Layouts/MainLayout";
+import FullWidthLayout from "../src/components/Layouts/FullWidthLayout";
 
 config.autoAddCss = false;
 

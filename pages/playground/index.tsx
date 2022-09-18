@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useRouter } from "next/router";
-import { playgroundMenuItems } from "../../routes";
+import { playgroundMenuItems } from "../../src/routes";
 import Link from "next/link";
 
 const Index: FC = () => {

@@ -3,11 +3,11 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { routeAnimate, stagger } from "../animations";
 import ImageGallery from 'react-image-gallery';
 
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../src/components/ProjectCard";
 
 import { projects } from "../data";
-import { Category, IImageMetaData, IProject } from "../types";
-import { getFolders, mapImagesResources, search } from "../lib/cloudinary";
+import { Category, IImageMetaData, IProject } from "../src/types";
+import { getFolders, mapImagesResources, search } from "../src/lib/cloudinary";
 
 const createProjectNavItems = (data: IProject[]) =>
   data.reduce<Category[]>(
