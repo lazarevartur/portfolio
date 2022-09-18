@@ -4,6 +4,7 @@ import React, { FC, useState } from "react";
 
 import { findPageNameByLink } from "../utils";
 import { pages } from "../routes";
+import s from "../styles/styles.module.scss";
 
 interface LinkItemProps {
   disable: boolean;
@@ -18,7 +19,7 @@ const LinkItem: FC<LinkItemProps> = ({ disable, link, name, onClick }) => {
   return (
     <Link href={link}>
       <a onClick={() => onClick(name)}>
-        <span className="transition-colors hover:text-green">{name}</span>
+        <span className={s.hover_link}>{name}</span>
       </a>
     </Link>
   );

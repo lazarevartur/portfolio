@@ -20,11 +20,11 @@ export const pages = [
 
 export const playgroundMenuItems = [
   {
-    name: "LanguageTranslator",
+    name: "Language Translator",
     link: APP_LINKS.playground + PLAYGROUND_LINKS.LanguageTranslator,
   },
   {
-    name: "SpeedTestGame",
+    name: "Speed Test Game",
     link: APP_LINKS.playground + PLAYGROUND_LINKS.SpeedTestGame,
   },
 ];
