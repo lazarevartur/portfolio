@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { search } from "../../lib/cloudinary";
+import { search } from "../../src/lib/cloudinary";
 
 export default async function handler(
   req: NextApiRequest,

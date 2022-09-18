@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { barAnimate } from "../animations";
+import { barAnimate } from "../../animations";
 import { ISkill } from "../types";
 
 const Bar: FC<ISkill> = ({ Icon, level, name }) => {

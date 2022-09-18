@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React, { FC } from "react";
-import { fadeInUp } from "../animations";
+import { fadeInUp } from "../../animations";
 import { IServices } from "../types";
 
 interface ServiceCardProps {

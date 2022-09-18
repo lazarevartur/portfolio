@@ -3,11 +3,11 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { routeAnimate, stagger } from "../animations";
 import ImageGallery from 'react-image-gallery';
 
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../src/components/ProjectCard";
 
 import { projects } from "../data";
-import { Category, IImageMetaData, IProject } from "../types";
-import { getFolders, mapImagesResources, search } from "../lib/cloudinary";
+import { Category, IImageMetaData, IProject } from "../src/types";
+import { getFolders, mapImagesResources, search } from "../src/lib/cloudinary";
 
 const createProjectNavItems = (data: IProject[]) =>
   data.reduce<Category[]>(
@@ -60,7 +60,6 @@ const Projects: FC<IProjects> = ({
 }) => {
   const navBarItems = useMemo(() => createProjectNavItems(projects), []);
   const [activeTab, setActiveTab] = useState<Category>("all");
-  const [activeCard, setCard] = useState<string>("");
 
   const [images2, setImages] = useState(defaultImages);
   const [nextCursor, setNextCursor] = useState<string | undefined>(
@@ -106,10 +105,8 @@ const Projects: FC<IProjects> = ({
             expression: `folder=${folderPath || ""}`,
           }),
         }).then((res) => res.json());
-        // console.log(results)
         const { resources, next_cursor: updateNextCursor } = results;
         const images = mapImagesResources(resources as IImageMetaData[]);
-        console.log(images);
         setImages((prev) => [...prev, ...images]);
         setNextCursor(updateNextCursor);
       })();
@@ -123,7 +120,7 @@ const Projects: FC<IProjects> = ({
       animate="animate"
       exit="exit"
       className="px-5 py-2 overflow-y-scroll "
-      style={{ height: "65vh" }}
+      style={{ height: "70vh" }}
     >
       <nav className="flex px-3 py-2 space-x-3">
         {navBarItems.map((item, index) => (
@@ -151,22 +148,3 @@ const Projects: FC<IProjects> = ({
 
 export default Projects;
 
-export async function getStaticProps() {
-  const results = await search({
-    expression: 'folder=""',
-  });
-
-
-  const { folders } = await getFolders();
-
-  const { resources, next_cursor: nextCursor } = results;
-  const images = mapImagesResources(resources as IImageMetaData[]);
-
-  return {
-    props: {
-      images,
-      folders,
-      nextCursor: nextCursor || false,
-    },
-  };
-}

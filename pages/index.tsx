@@ -1,6 +1,6 @@
 import {motion} from "framer-motion";
 import {routeAnimate, stagger} from "../animations";
-import ServiceCard from "../components/ServiceCard";
+import ServiceCard from "../src/components/ServiceCard";
 import {services} from "../data";
 
 const Index = () => {

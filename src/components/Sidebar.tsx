@@ -24,7 +24,7 @@ const Sidebar = () => {
       </p>
       <a
         className="flex items-center justify-center px-2 py-1 my-3 bg-gray-300 rounded-full dark:bg-dark-300"
-        href="/artur_zub_cv.pdf"
+        href="/public/artur_zub_cv.pdf"
         download="artur_zub_cv"
       >
         <GiTie className="w-6 h-6" />
@@ -39,14 +39,14 @@ const Sidebar = () => {
           <AiFillGithub className="w-8 h-8 cursor-pointer" />
         </a>
         <a
-          href="https://www.linkedin.com/in/arturzub/"
+          href="src/components/Sidebar"
           target="_blank"
           rel="noreferrer"
         >
           <AiFillLinkedin className="w-8 h-8 cursor-pointer" />
         </a>
         <a
-          href="https://www.instagram.com/artur_zub_8888/"
+          href="src/components/Sidebar"
           target="_blank"
           rel="noreferrer"
         >

@@ -7,17 +7,10 @@ import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 
 import { useOnClickOutside } from "../hooks/useOnClickOutside";
 
-import { fadeInUp, stagger } from "../animations";
+import { fadeInUp, stagger } from "../../animations";
 
 import type { IImageMetaData, IProject } from "../types";
-
-const mapImageToSliderData = (
-  images: IImageMetaData[]
-): ReactImageGalleryItem[] =>
-  images.map((image) => ({
-    original: image.secure_url,
-    thumbnail: image.secure_url,
-  }));
+import { mapImageToSliderData } from "../utils";
 
 const ProjectCard: FC<IProject> = ({
   name,
@@ -28,10 +21,13 @@ const ProjectCard: FC<IProject> = ({
   github_url,
   key_techs,
   folderPath,
+  tasks,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
   const projectCardRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<ReactImageGalleryItem[] | null>(null);
+  const [activeCard, setCard] = useState<string>("");
+
   const closeModal = () => {
     setShowDetail(false);
   };
@@ -42,28 +38,13 @@ const ProjectCard: FC<IProject> = ({
     setShowDetail(true);
   };
 
-  const images2 = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-    },
-  ];
-
   useEffect(() => {
-    if (folderPath) {
+    if (activeCard) {
       (async () => {
         const results = await fetch("/api/search", {
           method: "POST",
           body: JSON.stringify({
-            expression: `folder=${folderPath || ""}`,
+            expression: `folder=${activeCard || ""}`,
           }),
         }).then((res) => res.json());
         const { resources } = results;
@@ -71,11 +52,15 @@ const ProjectCard: FC<IProject> = ({
         setImages(images);
       })();
     }
-  }, [folderPath]);
+  }, [activeCard]);
+
   return (
     <motion.div
       variants={fadeInUp}
       className="col-span-12 p-2 bg-gray-200 rounded-lg sm:col-span-6 lg:col-span-4 dark:bg-dark-200"
+      onClick={() => {
+        setCard(folderPath);
+      }}
       ref={projectCardRef}
     >
       <div>
@@ -91,7 +76,7 @@ const ProjectCard: FC<IProject> = ({
         <p className="my-2 text-center">{name}</p>
 
         {showDetail && (
-          <div className="absolute top-0 left-0 z-10 grid w-full h-auto p-2 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100">
+          <div className="absolute top-0 left-0 z-10 grid w-full p-4 text-black bg-gray-100 rounded-xl shadow-custom-light dark:shadow-custom-dark md:grid-cols-2 gap-x-12 dark:text-white dark:bg-dark-100 ">
             <motion.div variants={stagger} initial="initial" animate="animate">
               <motion.div
                 variants={fadeInUp}
@@ -131,7 +116,7 @@ const ProjectCard: FC<IProject> = ({
 
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-wrap mt-5 text-sm tracking-wider"
+                className="flex flex-wrap my-5 text-sm tracking-wider"
               >
                 <div className="flex self-center underline mr-1">Stack:</div>
                 {key_techs.map((tech) => (
@@ -143,6 +128,18 @@ const ProjectCard: FC<IProject> = ({
                   </span>
                 ))}
               </motion.div>
+              {tasks && (
+                <>
+                  <motion.div className="font-bold" variants={fadeInUp}>
+                    What tasks did I solve?
+                  </motion.div>
+                  <motion.ul variants={fadeInUp}>
+                    {tasks.map((task, index) => (
+                      <li key={index}>&#183; {task}</li>
+                    ))}
+                  </motion.ul>
+                </>
+              )}
             </div>
 
             <motion.button

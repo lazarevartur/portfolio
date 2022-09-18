@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { fadeInUp, routeAnimate } from "../animations";
 
-import Bar from "../components/Bar";
+import Bar from "../src/components/Bar";
 import { languages, tools } from "../data";
 
 const Resume = () => {
@@ -28,7 +28,7 @@ const Resume = () => {
               Professional Training (React.js, JS)
             </h5>
             <p>
-              <a href="https://deveducation.com/en/" rel="noreferrer" target="_blank">
+              <a href="pages/resume" rel="noreferrer" target="_blank">
                 DevEducation (2020)
               </a>
             </p>
@@ -42,7 +42,7 @@ const Resume = () => {
               Front-End Developer 2021 - present
             </h5>
             <p>
-              <a href="https://blaize.tech/" target="_blank" rel="noreferrer">
+              <a href="pages/resume" target="_blank" rel="noreferrer">
                 Blaize
               </a>
             </p>
