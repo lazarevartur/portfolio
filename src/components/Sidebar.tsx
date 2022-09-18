@@ -39,14 +39,14 @@ const Sidebar = () => {
           <AiFillGithub className="w-8 h-8 cursor-pointer" />
         </a>
         <a
-          href="src/components/Sidebar"
+          href="https://www.linkedin.com/in/arturzub/"
           target="_blank"
           rel="noreferrer"
         >
           <AiFillLinkedin className="w-8 h-8 cursor-pointer" />
         </a>
         <a
-          href="src/components/Sidebar"
+          href="https://www.instagram.com/artur_zub_8888/"
           target="_blank"
           rel="noreferrer"
         >
