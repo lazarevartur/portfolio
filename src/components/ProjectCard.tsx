@@ -15,22 +15,23 @@ import { mapImageToSliderData } from "../utils";
 const ProjectCard: FC<IProject> = ({
   name,
   image_path,
-  category,
   deployed_url,
   description,
   github_url,
   key_techs,
   folderPath,
   tasks,
+  activeCardHandler,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
   const projectCardRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<ReactImageGalleryItem[] | null>(null);
-  const [activeCard, setCard] = useState<string>("");
+  const [activeCard, setActiveCard] = useState<string>("");
 
   const closeModal = () => {
     setShowDetail(false);
+    setActiveCard("");
   };
 
   useOnClickOutside(projectCardRef, closeModal);
@@ -42,6 +43,8 @@ const ProjectCard: FC<IProject> = ({
   useEffect(() => {
     if (activeCard) {
       (async () => {
+        activeCardHandler();
+
         const results = await fetch("/api/search", {
           method: "POST",
           body: JSON.stringify({
@@ -55,18 +58,12 @@ const ProjectCard: FC<IProject> = ({
     }
   }, [activeCard]);
 
-  useEffect(() => {
-    if (showDetail) {
-      cardRef?.current?.scrollIntoView();
-    }
-  }, [showDetail]);
-
   return (
     <motion.div
       variants={fadeInUp}
       className="col-span-12 p-2 bg-gray-200 rounded-lg sm:col-span-6 lg:col-span-4 dark:bg-dark-200"
       onClick={() => {
-        setCard(folderPath);
+        setActiveCard(folderPath);
       }}
       ref={projectCardRef}
     >

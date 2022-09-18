@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { routeAnimate, stagger } from "../animations";
-import ImageGallery from 'react-image-gallery';
 
 import ProjectCard from "../src/components/ProjectCard";
 
 import { projects } from "../data";
 import { Category, IImageMetaData, IProject } from "../src/types";
-import { getFolders, mapImagesResources, search } from "../src/lib/cloudinary";
+import { mapImagesResources } from "../src/lib/cloudinary";
 
 const createProjectNavItems = (data: IProject[]) =>
   data.reduce<Category[]>(
@@ -59,6 +58,7 @@ const Projects: FC<IProjects> = ({
   nextCursor: defaultNextCursor,
 }) => {
   const navBarItems = useMemo(() => createProjectNavItems(projects), []);
+  const navBarRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<Category>("all");
 
   const [images2, setImages] = useState(defaultImages);
@@ -95,6 +95,13 @@ const Projects: FC<IProjects> = ({
     setImages([]);
   };
 
+  const activeCardHandler = () => {
+    if (navBarRef.current) {
+      navBarRef.current.scrollIntoView();
+      window.scrollTo(0, 0);
+    }
+  };
+
   useEffect(() => {
     if (folderPath) {
       (async () => {
@@ -122,7 +129,7 @@ const Projects: FC<IProjects> = ({
       className="px-5 py-2 overflow-y-scroll "
       style={{ height: "70vh" }}
     >
-      <nav className="flex px-3 py-2 space-x-3 overflow-x-auto">
+      <nav ref={navBarRef} className="flex px-3 py-2 space-x-3 overflow-x-auto">
         {navBarItems.map((item, index) => (
           <ProjectNavItem
             key={index}
@@ -139,7 +146,11 @@ const Projects: FC<IProjects> = ({
         className="relative grid grid-cols-12 gap-4 my-3"
       >
         {projectList.map((item, index) => (
-          <ProjectCard key={index} {...item} />
+          <ProjectCard
+            key={index}
+            {...item}
+            activeCardHandler={activeCardHandler}
+          />
         ))}
       </motion.div>
     </motion.div>
