@@ -2,15 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 
-const pages = [
-  { name: "About", link: "/" },
-  { name: "Projects", link: "/projects" },
-  { name: "Resume", link: "/resume" },
-  // { name: "Sandbox", link: "/sandbox" },
-];
-
-const findPageNameByLink = (pathname: string) =>
-  pages.find((item) => item.link === pathname)?.name;
+import { findPageNameByLink } from "../utils";
+import { pages } from "../routes";
 
 interface LinkItemProps {
   disable: boolean;
