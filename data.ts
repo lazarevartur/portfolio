@@ -103,7 +103,7 @@ export const projects: IProject[] = [
     name: "DApp Mega league",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663371532/projects/nomo_v2/nomo_page_3_kxdvt2.png",
-    deployed_url: "https://app.leaguedao.com/megaleague/account-overview",
+    // deployed_url: "https://app.leaguedao.com/megaleague/account-overview",
     category: ["react", "next.js", "web3", "TypeScript", "node", "express"],
     description:
       "Decentralized open source project developing Web3 Fantasy Sports and Gaming Protocols.",
@@ -135,7 +135,7 @@ export const projects: IProject[] = [
     name: "DApp Nomo Game",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663443897/projects/nomo_v1/nomoKeeper_page_1_bshsci.png",
-    deployed_url: "https://app.leaguedao.com/nomo/",
+    // deployed_url: "https://app.leaguedao.com/nomo/",
     category: ["react", "web3", "node"],
     description:
       "Decentralized open source project developing Web3 Fantasy Sports and Gaming Protocols.",
@@ -191,7 +191,7 @@ export const projects: IProject[] = [
     name: "Cross-protocol LP tokens Swap",
     image_path:
       "https://res.cloudinary.com/frontdev-pro/image/upload/v1663444436/projects/flype/flype_page_5_abqe2j.png",
-    deployed_url: "https://flype.fi/",
+    // deployed_url: "https://flype.fi/",
     category: ["react", "redux", "TypeScript", "web3", "node", "express"],
     description:
       "A web interface that allows for easy interaction with the Flype protocol. \n" +
