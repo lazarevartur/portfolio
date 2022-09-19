@@ -52,3 +52,7 @@
 .imgBx {
   @apply relative h-52 w-52 bg-white mt-5 shadow-def border-4;
 }
+
+.hover_link {
+  @apply transition-colors hover:text-green
+}

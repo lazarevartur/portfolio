@@ -16,6 +16,31 @@ const Resume = () => {
       {/* {edu} */}
       <div className="grid gap-6 md:grid-cols-2">
         <motion.div variants={fadeInUp} initial="initial" animate="animate">
+          <h5 className="my-3 text-2xl font-bold">Experience</h5>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Front-End Developer 2021 - present
+            </h5>
+            <p>
+              <a href="pages/resume" target="_blank" rel="noreferrer">
+                Blaize
+              </a>
+            </p>
+          </div>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Full Stack Developer 2019-2020
+            </h5>
+            <p>Mirax company</p>
+          </div>
+          <div>
+            <h5 className="my-2 text-xl font-bold">
+              Full Stack Developer 2017-2018
+            </h5>
+            <p>Freelance</p>
+          </div>
+        </motion.div>
+        <motion.div variants={fadeInUp} initial="initial" animate="animate">
           <h5 className="my-3 text-2xl font-bold">Education</h5>
           <div>
             <h5 className="my-2 text-xl font-bold">
@@ -35,31 +60,6 @@ const Resume = () => {
           </div>
         </motion.div>
 
-        <motion.div variants={fadeInUp} initial="initial" animate="animate">
-          <h5 className="my-3 text-2xl font-bold">Experience</h5>
-          <div>
-            <h5 className="my-2 text-xl font-bold">
-              Front-End Developer 2021 - present
-            </h5>
-            <p>
-              <a href="pages/resume" target="_blank" rel="noreferrer">
-                Blaize
-              </a>
-            </p>
-          </div>
-          <div>
-            <h5 className="my-2 text-xl font-bold">
-              Full Stack Developer 2019-2021
-            </h5>
-            <p>Mirax company</p>
-          </div>
-          <div>
-            <h5 className="my-2 text-xl font-bold">
-              Full Stack Developer 2017-2018
-            </h5>
-            <p>Freelance</p>
-          </div>
-        </motion.div>
       </div>
 
       {/* {lang} */}
