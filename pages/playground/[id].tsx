@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import { useRouter } from "next/router";
 import { PLAYGROUND_COMPONENTS } from "../../src/config";
 
+import s from "../../src/styles/styles.module.scss";
+
 const PlaygroundItem = () => {
   const router = useRouter();
   const componentPath = `/${router.query.id}`;
@@ -18,7 +20,10 @@ const PlaygroundItem = () => {
   return (
     <div>
       <div>
-        <span className="mx-2 my-1 cursor-pointer" onClick={router.back}>
+        <span
+          className={`mx-2 my-1 cursor-pointer ${s.hover_link}`}
+          onClick={router.back}
+        >
           Go back
         </span>
       </div>
