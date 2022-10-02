@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   const queryClient = useRef(new QueryClient());
 
   const isPlayground = router.pathname.includes(APP_LINKS.playground);
+  console.log(1);
 
   return (
     <QueryClientProvider client={queryClient.current}>
